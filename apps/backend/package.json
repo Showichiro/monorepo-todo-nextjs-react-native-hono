@@ -1,0 +1,22 @@
+{
+  "name": "@monorepo-todo/backend",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "lint": "biome lint --write src/",
+    "format": "biome format --write src/"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.14.4",
+    "hono": "^4.7.11",
+    "@monorepo-todo/core": "workspace:*",
+    "@monorepo-todo/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.17",
+    "tsx": "^4.7.1",
+    "typescript": "^5.8.3"
+  }
+}
