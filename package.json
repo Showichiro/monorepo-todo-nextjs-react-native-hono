@@ -1,0 +1,31 @@
+{
+  "name": "monorepo-todo-nextjs-react-native-hono",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "check-types": "turbo check-types",
+    "lint": "turbo lint",
+    "format": "turbo format"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "packageManager": "pnpm@10.4.1",
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/node": "^24.0.1",
+    "arg": "^5.0.2",
+    "esbuild": "^0.25.5",
+    "glob": "^11.0.2",
+    "rimraf": "^5.0.0",
+    "tsx": "^4.7.1",
+    "turbo": "^2.5.4",
+    "typescript": "^5.8.3"
+  },
+  "volta": {
+    "node": "20.19.2"
+  }
+}

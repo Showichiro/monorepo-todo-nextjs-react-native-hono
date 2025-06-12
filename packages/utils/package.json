@@ -1,0 +1,37 @@
+{
+  "name": "@monorepo-todo/utils",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/cjs/index.js",
+  "module": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./array": {
+      "types": "./dist/types/array.d.ts",
+      "import": "./dist/array.js",
+      "require": "./dist/cjs/array.js"
+    }
+  },
+  "scripts": {
+    "build": "pnpm run clean && pnpm run build:types && tsx ../../build/build.mts && pnpm copy:package.cjs.json",
+    "build:types": "tsc --project tsconfig.build.json",
+    "copy:package.cjs.json": "echo '{\"type\":\"commonjs\"}' > dist/cjs/package.json && echo '{\"type\":\"commonjs\"}' >  dist/types/package.json",
+    "clean": "rimraf dist",
+    "dev": "tsc --project tsconfig.build.json --watch",
+    "check-types": "tsc --noEmit",
+    "lint": "biome lint --write src/",
+    "format": "biome format --write src/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "packageManager": "pnpm@10.4.1"
+}
