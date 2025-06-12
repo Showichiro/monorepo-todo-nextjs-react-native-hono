@@ -1,5 +1,5 @@
 import arg from "arg";
-import { build } from "esbuild";
+import { build, context } from "esbuild";
 import type { Plugin, PluginBuild, BuildOptions } from "esbuild";
 import * as glob from "glob";
 import fs from "fs";
@@ -70,5 +70,4 @@ const esmBuild = () =>
     format: "esm",
     plugins: [addExtension(".js")],
   });
-
-Promise.all([esmBuild(), cjsBuild()]);
+await Promise.all([esmBuild(), cjsBuild()]);

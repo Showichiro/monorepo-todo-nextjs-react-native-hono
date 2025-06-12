@@ -1,9 +1,17 @@
-import { generateArray } from "@monorepo-todo/utils";
+import { sum } from "@monorepo-todo/utils";
 
-export default function Home() {
-  const array = generateArray(function* () {
-    yield 1;
-    yield* [2, 3];
-  });
-  return <div>{array}</div>;
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const res = await fetch("http://localhost:3100");
+  if (!res.ok) {
+    return <div>エラー</div>;
+  }
+  const array = (await res.json()) as number[];
+  return (
+    <div>
+      <div>array: {array.join(",")}</div>
+      <div>sum:{sum(array)}</div>
+    </div>
+  );
 }
