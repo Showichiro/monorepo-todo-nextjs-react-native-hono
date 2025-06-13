@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import { sum } from "@monorepo-todo/utils";
+import { request, sum } from "@monorepo-todo/utils";
 import { useEffect, useState } from "react";
 import Constants from "expo-constants";
 
@@ -12,12 +12,12 @@ export default function Index() {
       try {
         const { expoConfig } = Constants;
         const api = expoConfig?.hostUri?.split(":")[0];
-        const res = await fetch(`http://${api}:3100`);
+        const res = await request<number[]>(`http://${api}:3100`);
         if (!res.ok) {
           setError("エラー");
           return;
         }
-        const data = (await res.json()) as number[];
+        const data = res.value;
         setArray(data);
       } catch (err: any) {
         setError(err.message);
