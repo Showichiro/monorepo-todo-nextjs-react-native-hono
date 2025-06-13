@@ -1,13 +1,13 @@
-import { sum } from "@monorepo-todo/utils";
+import { request, sum } from "@monorepo-todo/utils";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const res = await fetch("http://localhost:3100");
+  const res = await request<number[]>("http://localhost:3000");
   if (!res.ok) {
     return <div>エラー</div>;
   }
-  const array = (await res.json()) as number[];
+  const array = res.value;
   return (
     <div>
       <div>array: {array.join(",")}</div>

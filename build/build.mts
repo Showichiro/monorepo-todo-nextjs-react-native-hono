@@ -11,7 +11,10 @@ const args = arg({
 
 const isWatch = args["--watch"] || false;
 
+console.log(isWatch);
+
 const entryPoints = glob.sync("./src/**/*.ts");
+console.log(entryPoints);
 
 const commonOptions: BuildOptions = {
   entryPoints,
@@ -53,21 +56,43 @@ const addExtension = (
   },
 });
 
-const cjsBuild = () =>
-  build({
+if (isWatch) {
+  const cjsContext = await context({
     ...commonOptions,
     outbase: "./src",
     outdir: "./dist/cjs",
     format: "cjs",
+    minify: true,
   });
-
-const esmBuild = () =>
-  build({
+  const mjsContext = await context({
     ...commonOptions,
     bundle: true,
     outbase: "./src",
     outdir: "./dist",
     format: "esm",
     plugins: [addExtension(".js")],
+    minify: true,
   });
-await Promise.all([esmBuild(), cjsBuild()]);
+  await Promise.all([cjsContext.watch(), mjsContext.watch()]);
+} else {
+  const cjsBuild = () =>
+    build({
+      ...commonOptions,
+      outbase: "./src",
+      outdir: "./dist/cjs",
+      format: "cjs",
+      minify: true,
+    });
+
+  const esmBuild = () =>
+    build({
+      ...commonOptions,
+      bundle: true,
+      outbase: "./src",
+      outdir: "./dist",
+      format: "esm",
+      plugins: [addExtension(".js")],
+      minify: true,
+    });
+  await Promise.all([esmBuild(), cjsBuild()]);
+}
