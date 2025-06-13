@@ -4,13 +4,17 @@ import { generateArray } from "@monorepo-todo/utils";
 
 const app = new Hono();
 
-const route = app.get("/", (c) => {
-  const array = generateArray(function* () {
-    yield 1;
-    yield* [2, 3];
+const route = app
+  .get("/", (c) => {
+    const array = generateArray(function* () {
+      yield 1;
+      yield* [2, 3];
+    });
+    return c.json(array);
+  })
+  .post("/users", (c) => {
+    return c.json({});
   });
-  return c.json(array);
-});
 
 export type AppType = typeof route;
 
