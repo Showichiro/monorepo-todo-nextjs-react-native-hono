@@ -35,7 +35,7 @@
     "build:types": "tsc --project tsconfig.build.json",
     "copy:package.cjs.json": "echo '{\"type\":\"commonjs\"}' > dist/cjs/package.json && echo '{\"type\":\"commonjs\"}' >  dist/types/package.json",
     "clean": "rimraf dist",
-    "dev": "tsc --project tsconfig.build.json --watch && tsx ../../build/build.mts --watch",
+    "dev": "tsc --project tsconfig.build.json --watch && tsx ../../build/build.mts --watch && copy:package.cjs.json",
     "check-types": "tsc --noEmit",
     "lint": "biome lint --write src/",
     "format": "biome format --write src/"
